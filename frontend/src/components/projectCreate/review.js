@@ -19,6 +19,11 @@ const handleCreate = (metadata, updateMetadata, projectName, token, cloneProject
     arbitraryTasks: metadata.arbitraryTasks,
   };
 
+  if (!metadata.geom) {
+    setError('Area of interest not provided');
+    return;
+  }
+
   if (cloneProjectData.name !== null) {
     projectParams.projectName = '';
     projectParams.cloneFromProjectId = cloneProjectData.id;
