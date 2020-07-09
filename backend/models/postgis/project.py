@@ -152,7 +152,7 @@ class Project(db.Model):
     last_updated = db.Column(db.DateTime, default=timestamp)
     license_id = db.Column(db.Integer, db.ForeignKey("licenses.id", name="fk_licenses"))
     geometry = db.Column(Geometry("MULTIPOLYGON", srid=4326), nullable=False)
-    centroid = db.Column(Geometry("POINT", srid=4326))
+    centroid = db.Column(Geometry("POINT", srid=4326), nullable=False)
     country = db.Column(ARRAY(db.String), default=[])
     task_creation_mode = db.Column(
         db.Integer, default=TaskCreationMode.GRID.value, nullable=False

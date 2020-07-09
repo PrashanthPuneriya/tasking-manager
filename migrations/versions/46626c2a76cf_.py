@@ -29,6 +29,17 @@ def upgrade():
         ),
         nullable=False,
     )
+    op.alter_column(
+        "projects",
+        "centroid",
+        existing_type=geoalchemy2.types.Geometry(
+            geometry_type="POINT",
+            srid=4326,
+            from_text="ST_GeomFromEWKT",
+            name="geometry",
+        ),
+        nullable=False,
+    )
     # ### end Alembic commands ###
 
 
@@ -39,6 +50,17 @@ def downgrade():
         "geometry",
         existing_type=geoalchemy2.types.Geometry(
             geometry_type="MULTIPOLYGON",
+            srid=4326,
+            from_text="ST_GeomFromEWKT",
+            name="geometry",
+        ),
+        nullable=True,
+    )
+    op.alter_column(
+        "projects",
+        "centroid",
+        existing_type=geoalchemy2.types.Geometry(
+            geometry_type="POINT",
             srid=4326,
             from_text="ST_GeomFromEWKT",
             name="geometry",
